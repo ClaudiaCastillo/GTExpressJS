@@ -10,6 +10,8 @@ and the next middleware function in the application’s request-response
 cycle. These functions are used to modify req and res objects for
 tasks like parsing request bodies, adding response headers, etc.
  */
+
+app.use(express.static('public'));
 app.use(function(req, res, next){
    console.log("A new request received at " + Date.now());
 
@@ -27,13 +29,12 @@ app.use('/whoa', function(req, res, next){
    next();
 });
 
-app.get('/', function(req, res){
+app.get('/helloworld', function(req, res){
    res.send("Hello world!");
 });
-app.get('/why',function(req,res){
+app.get('/games',function(req,res){
   res.json(videogames);
 });
-
 
 app.get('/:id', function(req, res){
    res.send('The id you specified is ' + req.params.id);
@@ -42,7 +43,5 @@ app.get('/:id', function(req, res){
 app.get('/things/:name/:id', function(req, res) {
    res.send('id: ' + req.params.id + ' and name: ' + req.params.name);
 });
-
-
 
 app.listen(3000);
